@@ -1,7 +1,6 @@
 ### Euro XREF Currency Lookup ###
 from requests import get
 from bs4 import BeautifulSoup
-import argparse
 
 
 gru = get("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml").text
@@ -19,7 +18,7 @@ def currList(data=cc):
     return _l
 
 
-def returnRate(my_curr="CZK", data=cc):
+def returnRate(my_curr="", data=cc):
     for x in cc:
         if x.attrs.get("currency") == my_curr:
             print(
@@ -31,7 +30,7 @@ def returnRate(my_curr="CZK", data=cc):
 
 def main():
     my_curr = input("Please type the currency shorthand or press Enter to continue")
-    if len(my_curr) <= 1:
+    if len(my_curr) == 0:
         currList()
     returnRate(my_curr)
     print(
